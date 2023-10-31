@@ -18,7 +18,27 @@ import jakarta.transaction.Transactional;
 public class YourService {
     @Autowired
     private YourRepository yourRepository;
-
+    
+    //ヘッダー
+    public enum CsvHeader {
+        COLUMN1("Column1"),
+        COLUMN2("Column2"),
+        COLUMN3("Column3"),
+        COLUMN4("Column4"),
+        COLUMN5("Column5");
+        
+        private final String header;
+        
+        CsvHeader(String header) {
+            this.header = header;
+        }
+        
+        public String getHeader() {
+            return header;
+        }
+    }
+    
+    //csv書き込み
     public void exportToCSV(String filename) throws IOException {
         List<YourEntity> entities = yourRepository.findAll();
         FileWriter fileWriter = new FileWriter(filename);
@@ -41,7 +61,7 @@ public class YourService {
         fileWriter.close();
     }
 
-    
+    //tabel update_data →update_data2
     @Transactional
     public void updateData2Column() {
         List<YourEntity> entities = yourRepository.findAll();
@@ -53,6 +73,7 @@ public class YourService {
         yourRepository.saveAll(entities);
     }
 
+    //変換
     private String modifyData(String originalData) {
         if (originalData == null || originalData.length() != 6) {
             throw new IllegalArgumentException("Data must be 6 digits long");
@@ -68,22 +89,6 @@ public class YourService {
         }
     }
     
-    public enum CsvHeader {
-        COLUMN1("Column1"),
-        COLUMN2("Column2"),
-        COLUMN3("Column3"),
-        COLUMN4("Column4"),
-        COLUMN5("Column5");
-        
-        private final String header;
-        
-        CsvHeader(String header) {
-            this.header = header;
-        }
-        
-        public String getHeader() {
-            return header;
-        }
-    }
+
 
 }
