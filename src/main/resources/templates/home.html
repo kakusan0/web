@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>top page</title>
+	<meta charset="UTF-8">
+	<th:include template="metadata.html"></th:include>
+	<script th:src="@{/js/test.js}"></script>
+</head>
+
+<body>
+	<div id="root">
+		<span th:if="${form} != null" th:text="${form.mail}"></span>
+	</div>
+</body>
+
+</html>

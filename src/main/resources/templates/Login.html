@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>top page</title>
+	<meta charset="UTF-8">
+	<link th:href="@{/css/Login.css}" rel="styleSheet">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+</head>
+
+<body>
+	<div id="root">
+		<!--/* ログイン */-->
+		<form th:action="@{/login}" method="post">
+			<div>
+				<table class="login">
+					<tbody>
+						<tr>
+							<td class="mail">
+								<nobr>メールアドレス</nobr>
+							</td>
+							<td><input type="text" name="mail"  required></td>
+						</tr>
+						<tr>
+							<td class="pw">
+								<nobr>パスワード</nobr>
+							</td>
+							<td><input type="password" name="pw" autocomplete="current-password" required></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<input type="reset" value="クリア" />
+								<input class="favorite styled" type="submit" value="ログイン" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+
+			</div>
+		</form>
+
+		<hr />
+
+		<!--/* 情報 */-->
+		<div class="info">
+			<footer>
+				<address>
+					<ul class="sns">
+						<li class="github">
+							<!--/* github */-->
+							<a href="https://github.com/kakusan0" target="_blank" rel="noopener noreferrer">
+								<img style="width: 50px;"
+									src="https://developer.mozilla.org/static/media/github-mark-small.348586b8904b950b8ea8.svg"
+									alt="mdnの画像を使用" />
+							</a>
+
+						</li>
+						<li class="mail">
+							<!--/* メール */-->
+							<a href="mailto:gmakihiro@gmail.com" target="_blank" rel="noopener noreferrer"><img
+									src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_dark_1x_r5.png"
+									alt="google gmailから取得"></a>
+						</li>
+
+					</ul>
+				</address>
+			</footer>
+		</div>
+	</div>
+</body>
+
+</html>

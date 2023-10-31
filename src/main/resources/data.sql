@@ -1,0 +1,1 @@
+INSERT INTO account(mail, password) VALUES ('gmakihiro@gmail.com', 'aki0915K')
