@@ -14,6 +14,8 @@ public class YourEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "update_data")
-    private String field1;
-    // ゲッターとセッター...
+    private String update_data;
+    
+    @Column(name = "update_data2")
+    private String updateData2;
 }
