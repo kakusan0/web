@@ -16,6 +16,6 @@ public class YourEntity {
     @Column(name = "update_data")
     private String update_data;
     
-    @Column(name = "update_data2")
-    private String updateData2;
+    @Column(name = "update_data_2")
+    private String update_Data_2;
 }

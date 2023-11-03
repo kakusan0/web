@@ -1,7 +1,5 @@
 package com.example.demo.Repository;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,13 +12,13 @@ public class Dataexecute {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	//全件取得する場合は、queryか queryForList メソッドを利用します。
-	public List<Datastorage> selectAll() {
-		//全件取得のSQLを作成
-		String sql = "select * from Datastorage;";
-		//SQLを実行
-		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Datastorage>(Datastorage.class));
-	}
+//	//全件取得する場合は、queryか queryForList メソッドを利用します。
+//	public List<Datastorage> selectAll() {
+//		//全件取得のSQLを作成
+//		String sql = "select * from Datastorage;";
+//		//SQLを実行
+//		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Datastorage>(Datastorage.class));
+//	}
 
 	//ログイン時に使用
 	//1件だけ取得したい場合は queryForObject メソッドを利用します。
