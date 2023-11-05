@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.Model.mailstorage;
 
 @Repository
-public interface findmail extends JpaRepository<mailstorage, String> {
+public interface find extends JpaRepository<mailstorage, String> {
 }

@@ -1,7 +1,6 @@
 package com.example.demo.Model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
@@ -16,22 +15,17 @@ import lombok.Data;
 @Entity
 @Component
 @Data
-@Table(name = "tempaccount")
+@Table(name = "error")
 public class NG implements Serializable {
 
 	@Column(name = "id")
 	int id;
+
+	@Column(name = "text")
+	String text;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "mail")
-	String mail;
-
-	@Column(name = "password")
-	String pw;
-
-	@Column(name = "NG_flag")
-	Integer NG_flag;
-
-	@Column(name = "NG_date")
-	Date NG_date;
+	@Column(name = "id1")
+	int id1;
 }

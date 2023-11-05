@@ -8,16 +8,16 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Model.Datastorage;
 import com.example.demo.Model.mailstorage;
 import com.example.demo.Repository.Dataexecute;
-import com.example.demo.Repository.findmail;
+import com.example.demo.Repository.find;
 
 @Service
 public class Login {
 
-	private findmail findmail1;
+	private find find;
 
 	@Autowired
-	public void datastorage(findmail findmail1) {
-		this.findmail1 = findmail1;
+	public void datastorage(find find) {
+		this.find = find;
 	}
 
 	private Datastorage datastorage;
@@ -52,10 +52,12 @@ public class Login {
 	public boolean logincheck(String mail, String pw) {
 		Mailstorage.setMail(mail);
 		Mailstorage.setPw(pw);
-		String[] a = findmail1.findById(Mailstorage.getMail()).toString().split(" ");
+		String[] a = find.findById(Mailstorage.getMail()).toString().split(" ");
+		int i = 0;
 		try {
 			if (a[1].replaceAll(",", "").replaceAll("mail=", "").contains("@")
 					&& bCryptPasswordEncoder.matches(pw, a[2].replaceAll(",", "").replaceAll("pw=", ""))) {
+			} else if (i == 0) {
 				return true;
 			} else {
 				datastorage.setNG_flag(1);

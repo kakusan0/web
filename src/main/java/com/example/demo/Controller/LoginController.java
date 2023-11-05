@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.Model.Datastorage;
-import com.example.demo.Repository.Dataexecute;
 import com.example.demo.Service.Login;
 import com.example.demo.Service.Newaccount;
 
@@ -23,26 +22,13 @@ public class LoginController {
 	@Autowired
 	private Login Login;
 
-	private Dataexecute findlogin;
-
-	@Autowired
-	public void findlogin(Dataexecute dataexecute) {
-		this.findlogin = dataexecute;
-	}
-
 	private Newaccount Newaccount;
 
 	@Autowired
-	public void aaaa(Newaccount Newaccount) {
+	public void Newaccount(Newaccount Newaccount) {
 		this.Newaccount = Newaccount;
 	}
 
-	/**
-	 * アクセス時
-	 * @param mv
-	 * @param data
-	 * @return
-	 */
 	@GetMapping("/")
 	public ModelAndView index(ModelAndView mv) {
 		mv.addObject("showSection1", true);
@@ -50,11 +36,6 @@ public class LoginController {
 		return mv;
 	}
 
-	/**　ログイン時：第一処理
-	 * 
-	 * @param data
-	 * @return
-	 */
 	@PostMapping("login")
 	public String Login1(@ModelAttribute Datastorage data) {
 		boolean isAuthenticated = Login.logincheck(data.getMail(), data.getPw());
@@ -66,11 +47,6 @@ public class LoginController {
 		}
 	}
 
-	/** ログイン時：第二処理
-	 * 
-	 * @param mv
-	 * @return
-	 */
 	@GetMapping("Login2")
 	public ModelAndView Login2(ModelAndView mv) {
 		mv.addObject("showSection2", true);
@@ -79,11 +55,6 @@ public class LoginController {
 		return mv;
 	}
 
-	/** ログイン時：第三処理
-	 * 
-	 * @param mv
-	 * @return
-	 */
 	@GetMapping("Login3")
 	public ModelAndView Login3(ModelAndView mv) {
 		Datastorage form = (Datastorage) session.getAttribute("form");
@@ -99,25 +70,21 @@ public class LoginController {
 		return mv;
 	}
 
-	/** ログイン時：第四処理
-	 * 
-	 * @param mv
-	 * @return
-	 */
 	@PostMapping("userAdd")
 	public ModelAndView Login4(@ModelAttribute Datastorage data, ModelAndView mv) {
-		//boolean isAuthenticated = Login.login();
-		Newaccount.addUser(data.getMail(), data.getPw());
-		mv.setViewName("Login");
-		session.invalidate();
+		String a = Newaccount.addUser(data.getMail(), data.getPw());
+		if (a.equals("true")) {
+			mv.addObject("form", a);
+			mv.setViewName("Login");
+			return mv;
+		} else {
+			mv.addObject("showSection1", true);
+			mv.setViewName("Login");
+			session.invalidate();
+		}
 		return mv;
 	}
 
-	/** ログアウト
-	 * 
-	 * @param mv
-	 * @return
-	 */
 	@GetMapping("/logout")
 	public ModelAndView logout(ModelAndView mv) {
 		session.invalidate();
