@@ -17,12 +17,12 @@ import lombok.Data;
 @Component
 @Data
 @Table(name = "tempaccount")
-public class Datastorage implements Serializable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class NG implements Serializable {
+
 	@Column(name = "id")
 	int id;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "mail")
 	String mail;
 

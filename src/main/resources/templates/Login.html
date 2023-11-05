@@ -13,38 +13,66 @@
 <body>
 	<div id="root">
 		<!--/* ログイン */-->
-		<form th:action="@{/login}" method="post">
-			<div>
-				<table class="login">
-					<tbody>
-						<tr>
-							<td class="mail">
-								<nobr>メールアドレス</nobr>
-							</td>
-							<td><input type="text" name="mail"  required></td>
-						</tr>
-						<tr>
-							<td class="pw">
-								<nobr>パスワード</nobr>
-							</td>
-							<td><input type="password" name="pw" autocomplete="current-password" required></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>
-								<input type="reset" value="クリア" />
-								<input class="favorite styled" type="submit" value="ログイン" />
-							</td>
-						</tr>
-					</tbody>
-				</table>
-
-
-			</div>
-		</form>
-
+		<div th:if="${showSection1}">
+			<form th:action="@{/login}" method="post">
+				<div>
+					<table class="login">
+						<tbody>
+							<tr>
+								<td class="mail">
+									<nobr>メールアドレス</nobr>
+								</td>
+								<td><input type="text" name="mail" required></td>
+							</tr>
+							<tr>
+								<td class="pw">
+									<nobr>パスワード</nobr>
+								</td>
+								<td><input type="password" name="pw" autocomplete="current-password" required></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>
+									<input type="reset" value="クリア" />
+									<input class="favorite styled" type="submit" value="ログイン" />
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</form>
+		</div>
+		<!--/* 新規登録画面 */-->
+		<div th:if="${showSection2}">
+			<form th:action="@{/userAdd}" method="post">
+				<div>
+					<table class="login">
+						<tbody>
+							<tr>
+								<td class="mail">
+									<nobr>メールアドレス</nobr>
+								</td>
+								<td><input type="text" name="mail" required></td>
+							</tr>
+							<tr>
+								<td class="pw">
+									<nobr>パスワード</nobr>
+								</td>
+								<td><input type="password" name="pw" autocomplete="current-password" required></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>
+									<input type="reset" value="クリア" />
+									<input class="favorite styled" type="submit" value="登録" />
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</form>
+		</div>
 		<hr />
-
 		<!--/* 情報 */-->
 		<div class="info">
 			<footer>
@@ -57,7 +85,6 @@
 									src="https://developer.mozilla.org/static/media/github-mark-small.348586b8904b950b8ea8.svg"
 									alt="mdnの画像を使用" />
 							</a>
-
 						</li>
 						<li class="mail">
 							<!--/* メール */-->
@@ -65,7 +92,6 @@
 									src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_dark_1x_r5.png"
 									alt="google gmailから取得"></a>
 						</li>
-
 					</ul>
 				</address>
 			</footer>
