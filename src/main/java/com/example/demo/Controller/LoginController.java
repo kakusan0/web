@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Model.userstorage;
+import com.example.demo.Repository.JdbcRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,85 +10,88 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.Service.Login;
-import com.example.demo.Service.Newaccount;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
 
-	HttpSession session;
+    HttpSession session;
 
-	private Login Login;
+    @Autowired
+    private Login Login;
 
-	private Newaccount Newaccount;
+    @GetMapping("/")
+    public ModelAndView index(ModelAndView mv) {
+        mv.addObject("showSection1", true);
+        mv.setViewName("Login");
+        return mv;
+    }
 
-	@Autowired
-	public void Newaccount(Newaccount Newaccount) {
-		this.Newaccount = Newaccount;
-	}
+/*    @PostMapping("/login")
+    public String Login1(@ModelAttribute userstorage data) {
+        if (Login.logincheck()) {
+            session.setAttribute("form", data);
+            return "redirect:/Login3";
+        } else {
+            return "redirect:/Login2";
+        }
+    }*/
 
-	@GetMapping("/")
-	public ModelAndView index(ModelAndView mv) {
-		mv.addObject("showSection1", true);
-		mv.setViewName("Login");
-		return mv;
-	}
+    @GetMapping("/Login2")
+    public ModelAndView Login2(ModelAndView mv) {
+        mv.addObject("showSection2", true);
+        mv.setViewName("Login");
+        session.invalidate();
+        return mv;
+    }
 
-	@PostMapping("/login")
-	public String Login1(@ModelAttribute userstorage data) {
-		boolean isAuthenticated = Login.logincheck(data.getMail(), data.getPw());
-		if (isAuthenticated) {
-			session.setAttribute("form", data);
-			return "redirect:/Login3";
-		} else {
-			return "redirect:/Login2";
-		}
-	}
+/*    @GetMapping("/Login3")
+    public ModelAndView Login3(ModelAndView mv) {
+        Datastorage form = (Datastorage) session.getAttribute("form");
+        if (form != null) {
+            mv.addObject("form", form);
+        }
+        if (form == null) {
+            mv.setViewName("Login");
+            return mv;
+        }
+        mv.setViewName("home");
+        session.invalidate();
+        return mv;
+    }*/
 
-	@GetMapping("/Login2")
-	public ModelAndView Login2(ModelAndView mv) {
-		mv.addObject("showSection2", true);
-		mv.setViewName("Login");
-		session.invalidate();
-		return mv;
-	}
+/*    @PostMapping("/userAdd")
+    public ModelAndView Login4(@ModelAttribute Datastorage data, ModelAndView mv) {
+        String a = Newaccount.addUser(data.getMail(), data.getPw());
+        if (a.equals("true")) {
+            mv.addObject("form", a);
+            mv.setViewName("Login");
+            return mv;
+        } else {
+            mv.addObject("showSection1", true);
+            mv.setViewName("Login");
+            session.invalidate();
+        }
+        return mv;
+    }*/
 
-	@GetMapping("/Login3")
-	public ModelAndView Login3(ModelAndView mv) {
-		Datastorage form = (Datastorage) session.getAttribute("form");
-		if (form != null) {
-			mv.addObject("form", form);
-		}
-		if (form == null) {
-			mv.setViewName("Login");
-			return mv;
-		}
-		mv.setViewName("home");
-		session.invalidate();
-		return mv;
-	}
+    @GetMapping("/logout")
+    public ModelAndView logout(ModelAndView mv) {
+        session.invalidate();
+        mv.setViewName("logout");
+        return mv;
+    }
 
-	@PostMapping("/userAdd")
-	public ModelAndView Login4(@ModelAttribute Datastorage data, ModelAndView mv) {
-		String a = Newaccount.addUser(data.getMail(), data.getPw());
-		if (a.equals("true")) {
-			mv.addObject("form", a);
-			mv.setViewName("Login");
-			return mv;
-		} else {
-			mv.addObject("showSection1", true);
-			mv.setViewName("Login");
-			session.invalidate();
-		}
-		return mv;
-	}
+    @GetMapping("/batch")
+    public void sqlbatch() {
+        userstorage user = new userstorage();
+        user.setMail("aaa");
+        user.setPw("aaa");
 
-	@GetMapping("/logout")
-	public ModelAndView logout(ModelAndView mv) {
-		session.invalidate();
-		mv.setViewName("logout");
-		return mv;
-	}
+        // JdbcRepositoryのtestメソッドを使用してユーザーのメールアドレスを取得
+        String mail = JdbcRepository.test(user);
+    System.out.println(mail);
+    }
 
 }

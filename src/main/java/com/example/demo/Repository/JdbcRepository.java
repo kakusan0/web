@@ -10,16 +10,28 @@ import java.util.List;
 @Repository
 public class JdbcRepository {
 
-    private final JdbcTemplate jdbcTemplate;
+    private static JdbcTemplate jdbcTemplate;
 
     @Autowired
     public JdbcRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+        JdbcRepository.jdbcTemplate = jdbcTemplate;
     }
 
-    // JdbcTemplateを使用したメソッドをここに定義
-    public List<userstorage> singleselect() {
-        String sql = "SELECT id, name, email FROM customers";
-        return jdbcTemplate.query(sql, customerRowMapper());
+    public static String test(userstorage user) {
+        List<String> results = jdbcTemplate.query(
+                """
+                SELECT
+                   *
+                FROM
+                    USERSTORAGE
+                WHERE
+                    MAIL = ?
+                """,
+                (rs, rowNum) -> rs.getString("MAIL"),
+                user.getMail()
+        );
+
+        return results.isEmpty() ? null : results.get(0);
     }
-}
+
+    }

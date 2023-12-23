@@ -14,7 +14,6 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Component
 @Data
 @Table(name = "userstorage")
 public class userstorage implements Serializable {
@@ -30,7 +29,7 @@ public class userstorage implements Serializable {
 	String pw;
 
 	@Column(name = "NG_flag")
-	Integer NG_flag;
+	boolean NG_flag;
 
 	@Column(name = "NG_date")
 	Date NG_date;

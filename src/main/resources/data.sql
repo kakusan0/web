@@ -1,0 +1,7 @@
+INSERT INTO USERSTORAGE (MAIL, PASSWORD)
+VALUES ('aaa', 'aaa');
+SELECT MAIL,
+       PASSWORD
+FROM userstorage
+WHERE MAIL = 'aaa'
+  AND PASSWORD = 'aaa'
