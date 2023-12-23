@@ -1,46 +1,18 @@
 package com.example.demo.Service;
 
+import com.example.demo.Model.userstorage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Model.Datastorage;
-import com.example.demo.Model.mailstorage;
 import com.example.demo.Repository.Dataexecute;
-import com.example.demo.Repository.find;
 
 @Service
 public class Login {
 
-	private find find;
-
-	@Autowired
-	public void datastorage(find find) {
-		this.find = find;
-	}
-
-	private Datastorage datastorage;
-
-	@Autowired
-	private Dataexecute Dataexecute;
-
-	@Autowired
-	public void Dataexecute(Dataexecute dataexecute) {
-		this.Dataexecute = dataexecute;
-	}
-
-	@Autowired
-	public void datastorage(Datastorage datastorage) {
-		this.datastorage = datastorage;
-	}
-
-	private mailstorage Mailstorage;
-
-	@Autowired
-	public void findlogin(mailstorage Mailstorage) {
-		this.Mailstorage = Mailstorage;
-	}
+	private userstorage userstorage;
 
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -50,9 +22,9 @@ public class Login {
 	}
 
 	public boolean logincheck(String mail, String pw) {
-		Mailstorage.setMail(mail);
-		Mailstorage.setPw(pw);
-		String[] a = find.findById(Mailstorage.getMail()).toString().split(" ");
+		userstorage.setMail(mail);
+		userstorage.setPw(pw);
+		String[] a = find.findById(userstorage.getMail()).toString().split(" ");
 		int i = 0;
 		try {
 			if (a[1].replaceAll(",", "").replaceAll("mail=", "").contains("@")
@@ -60,7 +32,7 @@ public class Login {
 			} else if (i == 0) {
 				return true;
 			} else {
-				datastorage.setNG_flag(1);
+				userstorage.setNG_flag(1);
 				Dataexecute.save(datastorage);
 			}
 		} catch (InvalidDataAccessApiUsageException e) {

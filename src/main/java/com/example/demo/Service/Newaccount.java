@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.Model.Datastorage;
 import com.example.demo.Model.NG;
 import com.example.demo.Repository.Dataexecute;
-import com.example.demo.Repository.NGrepository;
 
 @Service
 public class Newaccount {

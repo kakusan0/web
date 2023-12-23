@@ -1,1 +1,10 @@
-CREATE TABLE IF NOT EXISTS tempaccount(mail varchar (255) NOT NULL, password varchar (255) NOT NULL, new_record_time timestamp default current_timestamp (), update_record_time timestamp);
+CREATE TABLE IF NOT EXISTS "userstorage"
+(
+    id       INT AUTO_INCREMENT PRIMARY KEY,
+    mail     VARCHAR(255),
+    password VARCHAR(255),
+    NG_flag  INT,
+    NG_date  DATE,
+    UNIQUE (mail),
+    UNIQUE (password)
+);

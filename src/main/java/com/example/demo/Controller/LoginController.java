@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Model.userstorage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.Model.Datastorage;
 import com.example.demo.Service.Login;
 import com.example.demo.Service.Newaccount;
 
@@ -16,10 +16,8 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
-	@Autowired
 	HttpSession session;
 
-	@Autowired
 	private Login Login;
 
 	private Newaccount Newaccount;
@@ -36,8 +34,8 @@ public class LoginController {
 		return mv;
 	}
 
-	@PostMapping("login")
-	public String Login1(@ModelAttribute Datastorage data) {
+	@PostMapping("/login")
+	public String Login1(@ModelAttribute userstorage data) {
 		boolean isAuthenticated = Login.logincheck(data.getMail(), data.getPw());
 		if (isAuthenticated) {
 			session.setAttribute("form", data);
@@ -47,7 +45,7 @@ public class LoginController {
 		}
 	}
 
-	@GetMapping("Login2")
+	@GetMapping("/Login2")
 	public ModelAndView Login2(ModelAndView mv) {
 		mv.addObject("showSection2", true);
 		mv.setViewName("Login");
@@ -55,7 +53,7 @@ public class LoginController {
 		return mv;
 	}
 
-	@GetMapping("Login3")
+	@GetMapping("/Login3")
 	public ModelAndView Login3(ModelAndView mv) {
 		Datastorage form = (Datastorage) session.getAttribute("form");
 		if (form != null) {
@@ -70,7 +68,7 @@ public class LoginController {
 		return mv;
 	}
 
-	@PostMapping("userAdd")
+	@PostMapping("/userAdd")
 	public ModelAndView Login4(@ModelAttribute Datastorage data, ModelAndView mv) {
 		String a = Newaccount.addUser(data.getMail(), data.getPw());
 		if (a.equals("true")) {
@@ -91,15 +89,5 @@ public class LoginController {
 		mv.setViewName("logout");
 		return mv;
 	}
-
-	//	@Autowired
-	//	private YourService yourService;
-	//
-	//	@GetMapping("test")
-	//	public ResponseEntity<String> exportToCSV() throws IOException {
-	//		//yourService.exportToCSV("output.csv");
-	//		yourService.updateData2Column();
-	//		return ResponseEntity.ok("CSVファイルが正常に出力されました");
-	//	}
 
 }

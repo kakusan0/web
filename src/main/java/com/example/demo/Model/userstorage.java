@@ -16,13 +16,13 @@ import lombok.Data;
 @Entity
 @Component
 @Data
-@Table(name = "tempaccount")
-public class mailstorage implements Serializable {
-
-	@Column(name = "id")
-	int id;
+@Table(name = "userstorage")
+public class userstorage implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	int id;
+
 	@Column(name = "mail")
 	String mail;
 
