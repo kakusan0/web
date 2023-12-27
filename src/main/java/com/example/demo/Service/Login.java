@@ -1,42 +1,39 @@
 package com.example.demo.Service;
 
 import com.example.demo.Model.userstorage;
-import com.example.demo.Repository.JdbcRepository;
+import com.example.demo.Repository.jpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class Login {
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	private userstorage userstorage;
+    @Autowired
+    private jpaRepository repository;
 
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+    public boolean check(String user, String pw) {
+        userstorage newUser = new userstorage();
+        newUser.setUser(user);
+        newUser.setPw(bCryptPasswordEncoder.encode(pw));
+        Optional<userstorage> check = repository.findByuser(user);
+        return check.isPresent();
+    }
 
-	@Autowired
-	public void bCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
-		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-	}
-
-//	public boolean logincheck() {
-////		String[] a = find.findById(userstorage.getMail()).toString().split(" ");
-//		JdbcRepository.singleselect("select * from ");
-//		int i = 0;
-//		try {
-//			if (a[1].replaceAll(",", "").replaceAll("mail=", "").contains("@")
-//					&& bCryptPasswordEncoder.matches(pw, a[2].replaceAll(",", "").replaceAll("pw=", ""))) {
-//			} else if (i == 0) {
-//				return true;
-//			} else {
-//				userstorage.setNG_flag(false);
-//				Dataexecute.save(datastorage);
-//			}
-//		} catch (InvalidDataAccessApiUsageException e) {
-//			//e.printStackTrace();
-//			return false;
-//		}
-//		return false;
-//
-//	}
+    /**
+     * ユーザー情報を登録するメソッド
+     *
+     * @param user ユーザー名
+     * @param pw   パスワード
+     */
+    public void registerUser(String user, String pw) {
+        userstorage newUser = new userstorage();
+        newUser.setUser(user);
+        newUser.setPw(bCryptPasswordEncoder.encode(pw));
+        repository.save(newUser);
+    }
 }

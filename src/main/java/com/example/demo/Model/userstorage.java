@@ -1,17 +1,10 @@
 package com.example.demo.Model;
 
+import jakarta.persistence.*;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-
-import org.springframework.stereotype.Component;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Data;
 
 @Entity
 @Data
@@ -19,13 +12,16 @@ import lombok.Data;
 public class userstorage implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "id" ,unique = true)
 	int id;
 
-	@Column(name = "mail")
+	@Column(name = "mail",unique = true)
 	String mail;
 
-	@Column(name = "password")
+	@Column(name = "username",unique = true)
+	String user;
+
+	@Column(name = "pw")
 	String pw;
 
 	@Column(name = "NG_flag")

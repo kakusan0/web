@@ -1,26 +1,34 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Model.userstorage;
-import com.example.demo.Repository.JdbcRepository;
+import com.example.demo.Repository.jpaRepository;
+import com.example.demo.Service.Login;
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.Service.Login;
-
-import jakarta.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class LoginController {
-
+    @Autowired
     HttpSession session;
 
     @Autowired
     private Login Login;
 
+    private userstorage userstorage;
+
+    @Autowired
+    private jpaRepository repository;
+
+    /**
+     * @return ログイン画面に遷移
+     * @author 角谷　亮洋
+     */
     @GetMapping("/")
     public ModelAndView index(ModelAndView mv) {
         mv.addObject("showSection1", true);
@@ -28,15 +36,20 @@ public class LoginController {
         return mv;
     }
 
-/*    @PostMapping("/login")
-    public String Login1(@ModelAttribute userstorage data) {
-        if (Login.logincheck()) {
-            session.setAttribute("form", data);
+    /**
+     * @author 角谷　亮洋
+     * @return ログイン画面か新規ユーザ追加画面のどちらかに遷移
+     */
+    @GetMapping("/login")
+    public String Login1(@ModelAttribute userstorage userstorage) {
+        if (Login.check(userstorage.getUser(),userstorage.getPw())) {
+            session.setAttribute("form", userstorage);
             return "redirect:/Login3";
         } else {
+            session.setAttribute("form", userstorage);
             return "redirect:/Login2";
         }
-    }*/
+    }
 
     @GetMapping("/Login2")
     public ModelAndView Login2(ModelAndView mv) {
@@ -45,10 +58,9 @@ public class LoginController {
         session.invalidate();
         return mv;
     }
-
-/*    @GetMapping("/Login3")
+    @GetMapping("/Login3")
     public ModelAndView Login3(ModelAndView mv) {
-        Datastorage form = (Datastorage) session.getAttribute("form");
+        userstorage form = (userstorage) session.getAttribute("form");
         if (form != null) {
             mv.addObject("form", form);
         }
@@ -59,10 +71,10 @@ public class LoginController {
         mv.setViewName("home");
         session.invalidate();
         return mv;
-    }*/
+    }
 
 /*    @PostMapping("/userAdd")
-    public ModelAndView Login4(@ModelAttribute Datastorage data, ModelAndView mv) {
+    public ModelAndView Login4(@ModelAttribute userstorage data, ModelAndView mv) {
         String a = Newaccount.addUser(data.getMail(), data.getPw());
         if (a.equals("true")) {
             mv.addObject("form", a);
@@ -83,15 +95,15 @@ public class LoginController {
         return mv;
     }
 
-    @GetMapping("/batch")
-    public void sqlbatch() {
-        userstorage user = new userstorage();
-        user.setMail("aaa");
-        user.setPw("aaa");
-
-        // JdbcRepositoryのtestメソッドを使用してユーザーのメールアドレスを取得
-        String mail = JdbcRepository.test(user);
-    System.out.println(mail);
+    /**
+     *
+     * @param pw　パスワード暗号化テスト
+     */
+    @GetMapping("/test")
+    public void usertest(@NotBlank @RequestParam("user") String user, @NotBlank @RequestParam("pw") String pw) {
+        Login.check(user,pw);
+        Login.registerUser(user,pw);
+        System.out.println();
     }
 
 }
