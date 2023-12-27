@@ -4,25 +4,26 @@ import com.example.demo.Model.userstorage;
 import com.example.demo.Repository.jpaRepository;
 import com.example.demo.Service.Login;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 @Controller
 public class LoginController {
+
+
     @Autowired
     HttpSession session;
 
-    @Autowired
     private Login Login;
 
     private userstorage userstorage;
 
-    @Autowired
     private jpaRepository repository;
 
     /**
@@ -37,16 +38,15 @@ public class LoginController {
     }
 
     /**
-     * @author 角谷　亮洋
      * @return ログイン画面か新規ユーザ追加画面のどちらかに遷移
+     * @author 角谷　亮洋
      */
-    @GetMapping("/login")
+    @PostMapping("/Login1")
     public String Login1(@ModelAttribute userstorage userstorage) {
-        if (Login.check(userstorage.getUser(),userstorage.getPw())) {
+        if (Login.check(userstorage.getUser(), userstorage.getPw())) {
             session.setAttribute("form", userstorage);
             return "redirect:/Login3";
         } else {
-            session.setAttribute("form", userstorage);
             return "redirect:/Login2";
         }
     }
@@ -55,9 +55,9 @@ public class LoginController {
     public ModelAndView Login2(ModelAndView mv) {
         mv.addObject("showSection2", true);
         mv.setViewName("Login");
-        session.invalidate();
         return mv;
     }
+
     @GetMapping("/Login3")
     public ModelAndView Login3(ModelAndView mv) {
         userstorage form = (userstorage) session.getAttribute("form");
@@ -73,9 +73,9 @@ public class LoginController {
         return mv;
     }
 
-/*    @PostMapping("/userAdd")
+    @PostMapping("/userAdd")
     public ModelAndView Login4(@ModelAttribute userstorage data, ModelAndView mv) {
-        String a = Newaccount.addUser(data.getMail(), data.getPw());
+/*        String a = Newaccount.addUser(data.getMail(), data.getPw());
         if (a.equals("true")) {
             mv.addObject("form", a);
             mv.setViewName("Login");
@@ -84,9 +84,12 @@ public class LoginController {
             mv.addObject("showSection1", true);
             mv.setViewName("Login");
             session.invalidate();
-        }
+        }*/
+        mv.addObject("showSection1", true);
+        mv.setViewName("Login");
+        session.invalidate();
         return mv;
-    }*/
+    }
 
     @GetMapping("/logout")
     public ModelAndView logout(ModelAndView mv) {
@@ -96,13 +99,12 @@ public class LoginController {
     }
 
     /**
-     *
-     * @param pw　パスワード暗号化テスト
+     * @param pw 　パスワード暗号化テスト
      */
     @GetMapping("/test")
-    public void usertest(@NotBlank @RequestParam("user") String user, @NotBlank @RequestParam("pw") String pw) {
-        Login.check(user,pw);
-        Login.registerUser(user,pw);
+    public void usertest(@Nullable @RequestParam("user") String user, @Nullable @RequestParam("pw") String pw) {
+        Login.check(user, pw);
+        Login.registerUser(user, pw);
         System.out.println();
     }
 

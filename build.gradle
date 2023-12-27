@@ -29,7 +29,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 	implementation 'org.springframework.security:spring-security-crypto'
-
 	compileOnly 'org.projectlombok:lombok'
 	
 	runtimeOnly 'mysql:mysql-connector-java:8.0.33'
@@ -37,7 +36,6 @@ dependencies {
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'ch.qos.logback:logback-classic'
-	testImplementation 'org.springframework.security:spring-security-test'
 
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'

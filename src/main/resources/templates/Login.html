@@ -7,14 +7,13 @@
 	<link th:href="@{/css/Login.css}" rel="styleSheet">
 	<meta http-equiv="content-type" content="no-cache, no-store, must-revalidate">
 	<meta http-equiv="refresh" content="no-cache">
-	<meta http-equiv="refresh" content="0">
 </head>
 
 <body>
 	<div id="root">
 		<!--/* ログイン */-->
-		<div th:if="${showSection1}">
-			<form th:action="@{/login}" method="post">
+<!--		<div th:if="${showSection1}">-->
+			<form th:action="@{/Login1}" method="post">
 				<div>
 					<table class="login">
 						<tbody>
@@ -45,7 +44,7 @@
 					</table>
 				</div>
 			</form>
-		</div>
+<!--		</div>-->
 		<!--/* 新規登録画面 */-->
 		<div th:if="${showSection2}">
 			<form th:action="@{/userAdd}" method="post">

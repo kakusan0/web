@@ -10,10 +10,8 @@ import java.util.Optional;
 
 @Service
 public class Login {
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
     private jpaRepository repository;
 
     public boolean check(String user, String pw) {
