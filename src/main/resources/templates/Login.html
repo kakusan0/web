@@ -12,7 +12,7 @@
 <body>
 	<div id="root">
 		<!--/* ログイン */-->
-<!--		<div th:if="${showSection1}">-->
+		<div th:if="${showSection1}">
 			<form th:action="@{/Login1}" method="post">
 				<div>
 					<table class="login">
@@ -44,7 +44,7 @@
 					</table>
 				</div>
 			</form>
-<!--		</div>-->
+		</div>
 		<!--/* 新規登録画面 */-->
 		<div th:if="${showSection2}">
 			<form th:action="@{/userAdd}" method="post">

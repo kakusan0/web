@@ -4,6 +4,7 @@ import com.example.demo.Model.userstorage;
 import com.example.demo.Repository.jpaRepository;
 import com.example.demo.Service.Login;
 import jakarta.servlet.http.HttpSession;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
@@ -16,10 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 
-
-    @Autowired
     HttpSession session;
 
+    @Autowired
     private Login Login;
 
     private userstorage userstorage;
@@ -43,7 +43,7 @@ public class LoginController {
      */
     @PostMapping("/Login1")
     public String Login1(@ModelAttribute userstorage userstorage) {
-        if (Login.check(userstorage.getUser(), userstorage.getPw())) {
+        if (Login.check(userstorage.getMail(), userstorage.getPw())) {
             session.setAttribute("form", userstorage);
             return "redirect:/Login3";
         } else {
