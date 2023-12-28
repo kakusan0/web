@@ -1,7 +1,6 @@
 package com.jp.web.Controller;
 
 import com.jp.web.Model.userstorage;
-import com.jp.web.Repository.jpaRepository;
 import com.jp.web.Service.Login;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +17,10 @@ public class LoginController {
 
     @Autowired
     private Login Login;
-
-    private userstorage userstorage;
-
-    private jpaRepository repository;
+//
+//    private userstorage userstorage;
+//
+//    private jpaRepository repository;
 
     /**
      * @return 1.ログイン画面に遷移
@@ -30,7 +29,7 @@ public class LoginController {
     @GetMapping("/")
     public ModelAndView index(ModelAndView mv) {
         mv.addObject("showSection1", true);
-        mv.setViewName("Login");
+        mv.setViewName("account");
         return mv;
     }
 
@@ -40,41 +39,43 @@ public class LoginController {
      * @author 角谷　亮洋
      */
     @PostMapping("/Login")
-    public String Login(@ModelAttribute userstorage userstorage) {
+    public ModelAndView Login(@ModelAttribute userstorage userstorage,ModelAndView mv) {
         String USER = userstorage.getMail();
         String PW = userstorage.getPw();
         //アカウントが存在している場合
         if (!Login.check(USER, PW)) {
             session.setAttribute("USER", USER);
-            return "redirect:/postcode-search";
+            mv.setViewName("redirect:/test");
         } else {
             //アカウントが存在しない場合、
             //新規アカウント登録画面に遷移
-            return "redirect:/signup";
+            mv.addObject("showSection2", true);
+            mv.setViewName("account");
         }
-    }
-
-    @GetMapping("/postcode-search")
-    public ModelAndView Login3(ModelAndView mv) {
-        userstorage form = (userstorage) session.getAttribute("form");
-        if (form != null) {
-            mv.addObject("form", form);
-            mv.setViewName("test");
-        }
-        mv.setViewName("Login");
         return mv;
     }
 
-    /**
-     * @return 1.新規アカウント登録画面に遷移
-     * @author 角谷　亮洋
-     */
-    @GetMapping("/signup")
-    public ModelAndView signup(ModelAndView mv) {
-        mv.addObject("showSection2", true);
-        mv.setViewName("Login");
-        return mv;
-    }
+//    @GetMapping("/postcode-search")
+//    public ModelAndView Login3(ModelAndView mv) {
+//        userstorage form = (userstorage) session.getAttribute("form");
+//        if (form != null) {
+//            mv.addObject("form", form);
+//            mv.setViewName("test");
+//        }
+//        mv.setViewName("Login");
+//        return mv;
+//    }
+
+//    /**
+//     * @return 1.新規アカウント登録画面に遷移
+//     * @author 角谷　亮洋
+//     */
+//    @GetMapping("/signup")
+//    public ModelAndView signup(ModelAndView mv) {
+//        mv.addObject("showSection2", true);
+//        mv.setViewName("account");
+//        return mv;
+//    }
 
     /**
      * @return 1.次の画面に遷移
@@ -89,9 +90,10 @@ public class LoginController {
         if (Login.check(USER, PW)) {
             Login.newUser(USER, PW);
             session.setAttribute("USER", USER);
-            mv.setViewName("test");
+            mv.setViewName("redirect:/test");
         } else {
-            mv.setViewName("redirect:/signup");
+            mv.addObject("showSection2", true);
+            mv.setViewName("redirect:/Login");
         }
         return mv;
     }
@@ -99,7 +101,7 @@ public class LoginController {
     @GetMapping("/logout")
     public ModelAndView logout(ModelAndView mv) {
         session.invalidate();
-        mv.setViewName("Login");
+        mv.setViewName("account");
         return mv;
     }
 }
