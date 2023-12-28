@@ -15,13 +15,13 @@ public class userstorage implements Serializable {
     @Column(name = "id", unique = true)
     int id;
 
-    @Column(name = "mail", unique = true)
+    @Column(name = "email", unique = true)
     String mail;
 
     @Column(name = "username", unique = true)
     String user;
 
-    @Column(name = "pw")
+    @Column(name = "password")
     String pw;
 
     @Column(name = "NG_flag")
