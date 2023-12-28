@@ -1,8 +1,8 @@
-package com.example.demo.Controller;
+package com.jp.web.Controller;
 
-import com.example.demo.Model.userstorage;
-import com.example.demo.Repository.jpaRepository;
-import com.example.demo.Service.Login;
+import com.jp.web.Model.userstorage;
+import com.jp.web.Repository.jpaRepository;
+import com.jp.web.Service.Login;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

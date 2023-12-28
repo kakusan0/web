@@ -1,6 +1,6 @@
-package com.example.demo.Repository;
+package com.jp.web.Repository;
 
-import com.example.demo.Model.userstorage;
+import com.jp.web.Model.userstorage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

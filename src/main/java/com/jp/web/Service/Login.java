@@ -1,7 +1,7 @@
-package com.example.demo.Service;
+package com.jp.web.Service;
 
-import com.example.demo.Model.userstorage;
-import com.example.demo.Repository.jpaRepository;
+import com.jp.web.Model.userstorage;
+import com.jp.web.Repository.jpaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
