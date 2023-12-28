@@ -2,108 +2,108 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>top page</title>
-	<meta charset="UTF-8">
-	<link th:href="@{/css/Login.css}" rel="styleSheet">
-	<meta http-equiv="content-type" content="no-cache, no-store, must-revalidate">
-	<meta http-equiv="refresh" content="no-cache">
+    <title>top page</title>
+    <meta charset="UTF-8">
+    <link rel="styleSheet" th:href="@{/css/Login.css}">
+    <meta content="no-cache, no-store, must-revalidate" http-equiv="content-type">
+    <meta content="no-cache" http-equiv="refresh">
 </head>
 
 <body>
-	<div id="root">
-		<!--/* ログイン */-->
-		<div th:if="${showSection1}">
-			<form th:action="@{/Login}" method="post">
-				<div>
-					<table class="login">
-						<tbody>
-							<tr>
-								<td class="mail">
-									<nobr>メールアドレス</nobr>
-								</td>
-								<td><label>
-									<input type="email" name="mail" required>
-								</label></td>
-							</tr>
-							<tr>
-								<td class="pw">
-									<nobr>パスワード</nobr>
-								</td>
-								<td><label>
-									<input type="password" name="pw" autocomplete="current-password" required>
-								</label></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td>
-									<input type="reset" value="クリア" />
-									<input class="favorite styled" type="submit" value="ログイン" />
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</form>
-		</div>
-		<!--/* 新規登録画面 */-->
-		<div th:if="${showSection2}">
-			<form th:action="@{/userAdd}" method="post">
-				<div>
-					<table class="login">
-						<tbody>
-							<tr>
-								<td class="mail">
-									<nobr>メールアドレス</nobr>
-								</td>
-								<td><label>
-									<input type="text" name="mail" required>
-								</label></td>
-							</tr>
-							<tr>
-								<td class="pw">
-									<nobr>パスワード</nobr>
-								</td>
-								<td><label>
-									<input type="password" name="pw" autocomplete="current-password" required>
-								</label></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td>
-									<input type="reset" value="クリア" />
-									<input class="favorite styled" type="submit" value="登録" />
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</form>
-		</div>
-		<hr />
-		<!--/* 情報 */-->
-		<div class="info">
-			<footer>
-				<address>
-					<ul class="sns">
-						<li class="github">
-							<!--/* github */-->
-							<a href="https://github.com/kakusan0" target="_blank" rel="noopener noreferrer">
-								<img style="width: 50px;"
-									src="https://developer.mozilla.org/static/media/github-mark-small.348586b8904b950b8ea8.svg"
-									alt="mdnの画像を使用" />
-							</a>
-						</li>
-						<li class="mail">
-							<!--/* メール */-->
-							<a href="mailto:gmakihiro@gmail.com" target="_blank" rel="noopener noreferrer"><img
-									src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_dark_1x_r5.png"
-									alt="google gmailから取得"></a>
-						</li>
-					</ul>
-				</address>
-			</footer>
-		</div>
-	</div>
+<div id="root">
+    <!--/* ログイン */-->
+    <div th:if="${showSection1}">
+        <form method="post" th:action="@{/Login}">
+            <div>
+                <table class="login">
+                    <tbody>
+                    <tr>
+                        <td class="mail">
+                            <nobr>メールアドレス</nobr>
+                        </td>
+                        <td><label>
+                            <input name="mail" required type="email">
+                        </label></td>
+                    </tr>
+                    <tr>
+                        <td class="pw">
+                            <nobr>パスワード</nobr>
+                        </td>
+                        <td><label>
+                            <input autocomplete="current-password" name="pw" required type="password">
+                        </label></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="reset" value="クリア"/>
+                            <input class="favorite styled" type="submit" value="ログイン"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+    <!--/* 新規登録画面 */-->
+    <div th:if="${showSection2}">
+        <form method="post" th:action="@{/userAdd}">
+            <div>
+                <table class="login">
+                    <tbody>
+                    <tr>
+                        <td class="mail">
+                            <nobr>メールアドレス</nobr>
+                        </td>
+                        <td><label>
+                            <input name="mail" required type="text">
+                        </label></td>
+                    </tr>
+                    <tr>
+                        <td class="pw">
+                            <nobr>パスワード</nobr>
+                        </td>
+                        <td><label>
+                            <input autocomplete="current-password" name="pw" required type="password">
+                        </label></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="reset" value="クリア"/>
+                            <input class="favorite styled" type="submit" value="登録"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+    <hr/>
+    <!--/* 情報 */-->
+    <div class="info">
+        <footer>
+            <address>
+                <ul class="sns">
+                    <li class="github">
+                        <!--/* github */-->
+                        <a href="https://github.com/kakusan0" rel="noopener noreferrer" target="_blank">
+                            <img alt="mdnの画像を使用"
+                                 src="https://developer.mozilla.org/static/media/github-mark-small.348586b8904b950b8ea8.svg"
+                                 style="width: 50px;"/>
+                        </a>
+                    </li>
+                    <li class="mail">
+                        <!--/* メール */-->
+                        <a href="mailto:gmakihiro@gmail.com" rel="noopener noreferrer" target="_blank"><img
+                                alt="google gmailから取得"
+                                src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_dark_1x_r5.png"></a>
+                    </li>
+                </ul>
+            </address>
+        </footer>
+    </div>
+</div>
 </body>
 
 </html>

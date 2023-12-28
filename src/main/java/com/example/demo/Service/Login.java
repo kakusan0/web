@@ -25,7 +25,7 @@ public class Login {
         userstorage checks = new userstorage();
         checks.setMail(user);
         checks.setPw(bCryptPasswordEncoder.encode(pw));
-        Optional<userstorage> check = repository.findByUserAndPw(checks.getMail(),checks.getPw());
+        Optional<userstorage> check = repository.findByUserAndPw(checks.getMail(), checks.getPw());
         return check.isEmpty();
     }
 

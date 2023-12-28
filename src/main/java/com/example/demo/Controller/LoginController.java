@@ -24,8 +24,8 @@ public class LoginController {
     private jpaRepository repository;
 
     /**
-     * @return  1.ログイン画面に遷移
-     * @author  角谷　亮洋
+     * @return 1.ログイン画面に遷移
+     * @author 角谷　亮洋
      */
     @GetMapping("/")
     public ModelAndView index(ModelAndView mv) {
@@ -35,9 +35,9 @@ public class LoginController {
     }
 
     /**
-     * @return  1.次の画面に遷移
-     *          2.新規ユーザ追加画面に遷移
-     * @author  角谷　亮洋
+     * @return 1.次の画面に遷移
+     * 2.新規ユーザ追加画面に遷移
+     * @author 角谷　亮洋
      */
     @PostMapping("/Login")
     public String Login(@ModelAttribute userstorage userstorage) {
@@ -66,8 +66,8 @@ public class LoginController {
     }
 
     /**
-     * @return  1.新規アカウント登録画面に遷移
-     * @author  角谷　亮洋
+     * @return 1.新規アカウント登録画面に遷移
+     * @author 角谷　亮洋
      */
     @GetMapping("/signup")
     public ModelAndView signup(ModelAndView mv) {
@@ -77,9 +77,9 @@ public class LoginController {
     }
 
     /**
-     * @return  1.次の画面に遷移
-     *          2.新規ユーザ追加画面に遷移
-     * @author  角谷　亮洋
+     * @return 1.次の画面に遷移
+     * 2.新規ユーザ追加画面に遷移
+     * @author 角谷　亮洋
      */
     @PostMapping("/userAdd")
     public ModelAndView userAdd(@ModelAttribute userstorage userstorage, ModelAndView mv) {
