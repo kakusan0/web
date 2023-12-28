@@ -4,10 +4,9 @@ CREATE TABLE IF NOT EXISTS userstorage
     mail     VARCHAR(255),
     username VARCHAR(255),
     pw       VARCHAR(255),
-    NG_flag  boolean,
+    NG_flag  BOOLEAN,
     NG_date  DATETIME,
     PRIMARY KEY (id),
     UNIQUE (mail),
-    UNIQUE (username),
-    UNIQUE (pw)
+    UNIQUE (username)
 );

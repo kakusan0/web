@@ -13,7 +13,7 @@
 	<div id="root">
 		<!--/* ログイン */-->
 		<div th:if="${showSection1}">
-			<form th:action="@{/Login1}" method="post">
+			<form th:action="@{/Login}" method="post">
 				<div>
 					<table class="login">
 						<tbody>
@@ -22,7 +22,7 @@
 									<nobr>メールアドレス</nobr>
 								</td>
 								<td><label>
-									<input type="text" name="mail" required>
+									<input type="email" name="mail" required>
 								</label></td>
 							</tr>
 							<tr>

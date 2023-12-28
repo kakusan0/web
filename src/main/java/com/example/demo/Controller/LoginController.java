@@ -4,19 +4,16 @@ import com.example.demo.Model.userstorage;
 import com.example.demo.Repository.jpaRepository;
 import com.example.demo.Service.Login;
 import jakarta.servlet.http.HttpSession;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
-
+    @Autowired
     HttpSession session;
 
     @Autowired
@@ -27,8 +24,8 @@ public class LoginController {
     private jpaRepository repository;
 
     /**
-     * @return ログイン画面に遷移
-     * @author 角谷　亮洋
+     * @return  1.ログイン画面に遷移
+     * @author  角谷　亮洋
      */
     @GetMapping("/")
     public ModelAndView index(ModelAndView mv) {
@@ -38,74 +35,71 @@ public class LoginController {
     }
 
     /**
-     * @return ログイン画面か新規ユーザ追加画面のどちらかに遷移
-     * @author 角谷　亮洋
+     * @return  1.次の画面に遷移
+     *          2.新規ユーザ追加画面に遷移
+     * @author  角谷　亮洋
      */
-    @PostMapping("/Login1")
-    public String Login1(@ModelAttribute userstorage userstorage) {
-        if (Login.check(userstorage.getMail(), userstorage.getPw())) {
-            session.setAttribute("form", userstorage);
-            return "redirect:/Login3";
+    @PostMapping("/Login")
+    public String Login(@ModelAttribute userstorage userstorage) {
+        String USER = userstorage.getMail();
+        String PW = userstorage.getPw();
+        //アカウントが存在している場合
+        if (!Login.check(USER, PW)) {
+            session.setAttribute("USER", USER);
+            return "redirect:/postcode-search";
         } else {
-            return "redirect:/Login2";
+            //アカウントが存在しない場合、
+            //新規アカウント登録画面に遷移
+            return "redirect:/signup";
         }
     }
 
-    @GetMapping("/Login2")
-    public ModelAndView Login2(ModelAndView mv) {
+    @GetMapping("/postcode-search")
+    public ModelAndView Login3(ModelAndView mv) {
+        userstorage form = (userstorage) session.getAttribute("form");
+        if (form != null) {
+            mv.addObject("form", form);
+            mv.setViewName("test");
+        }
+        mv.setViewName("Login");
+        return mv;
+    }
+
+    /**
+     * @return  1.新規アカウント登録画面に遷移
+     * @author  角谷　亮洋
+     */
+    @GetMapping("/signup")
+    public ModelAndView signup(ModelAndView mv) {
         mv.addObject("showSection2", true);
         mv.setViewName("Login");
         return mv;
     }
 
-    @GetMapping("/Login3")
-    public ModelAndView Login3(ModelAndView mv) {
-        userstorage form = (userstorage) session.getAttribute("form");
-        if (form != null) {
-            mv.addObject("form", form);
-        }
-        if (form == null) {
-            mv.setViewName("Login");
-            return mv;
-        }
-        mv.setViewName("home");
-        session.invalidate();
-        return mv;
-    }
-
+    /**
+     * @return  1.次の画面に遷移
+     *          2.新規ユーザ追加画面に遷移
+     * @author  角谷　亮洋
+     */
     @PostMapping("/userAdd")
-    public ModelAndView Login4(@ModelAttribute userstorage data, ModelAndView mv) {
-/*        String a = Newaccount.addUser(data.getMail(), data.getPw());
-        if (a.equals("true")) {
-            mv.addObject("form", a);
-            mv.setViewName("Login");
-            return mv;
+    public ModelAndView userAdd(@ModelAttribute userstorage userstorage, ModelAndView mv) {
+        //userが登録できる場合
+        String USER = userstorage.getMail();
+        String PW = userstorage.getPw();
+        if (Login.check(USER, PW)) {
+            Login.newUser(USER, PW);
+            session.setAttribute("USER", USER);
+            mv.setViewName("test");
         } else {
-            mv.addObject("showSection1", true);
-            mv.setViewName("Login");
-            session.invalidate();
-        }*/
-        mv.addObject("showSection1", true);
-        mv.setViewName("Login");
-        session.invalidate();
+            mv.setViewName("redirect:/signup");
+        }
         return mv;
     }
 
     @GetMapping("/logout")
     public ModelAndView logout(ModelAndView mv) {
         session.invalidate();
-        mv.setViewName("logout");
+        mv.setViewName("Login");
         return mv;
     }
-
-    /**
-     * @param pw 　パスワード暗号化テスト
-     */
-    @GetMapping("/test")
-    public void usertest(@Nullable @RequestParam("user") String user, @Nullable @RequestParam("pw") String pw) {
-        Login.check(user, pw);
-        Login.registerUser(user, pw);
-        System.out.println();
-    }
-
 }
