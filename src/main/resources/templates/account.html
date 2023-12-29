@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org">
-
+<!--suppress ALL -->
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="ja">
 <head>
     <title>top page</title>
     <meta charset="UTF-8">
@@ -11,6 +11,9 @@
 
 <body>
 <div id="root">
+    <section layout:fragment="content">
+        <p>This is a paragraph from the content page</p>
+    </section>
     <!--/* ログイン */-->
     <div th:if="${showSection1}">
         <form method="post" th:action="@{/Login}">
@@ -102,6 +105,13 @@
                 </ul>
             </address>
         </footer>
+    </div>
+    <div class="logout">
+        <form method="post" th:action="@{/logout}">
+            <div>
+
+            </div>
+        </form>
     </div>
 </div>
 </body>
