@@ -6,7 +6,7 @@ build/
 !**/src/test/**/build/
 
 ### 設計書 ###
-!**/src/main/resources/基本設計書/.~lock.ログイン画面.xlsx#
+*.xlsx#
 
 ### STS ###
 .apt_generated
