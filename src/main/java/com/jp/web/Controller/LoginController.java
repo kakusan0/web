@@ -35,7 +35,7 @@ public class LoginController {
      * @author 角谷　亮洋
      */
     @PostMapping("/Login")
-    public ModelAndView Login(@ModelAttribute userstorage userstorage,ModelAndView mv) {
+    public ModelAndView Login(@ModelAttribute userstorage userstorage, ModelAndView mv) {
         String USER = userstorage.getMail();
         String PW = userstorage.getPw();
         //アカウントが存在している場合
