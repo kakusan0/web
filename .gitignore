@@ -4,7 +4,7 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-!**/src/main/resources/基本設計書/.~lock.ログイン画面.xlsx#
+!**/src/main/resources/基本設計書/.~lock.ログイン画面.xlsx#
 ### STS ###
 .apt_generated
 .classpath
