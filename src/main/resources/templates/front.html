@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="ja">
+<head>
+    <title>top page</title>
+    <meta charset="UTF-8">
+    <link rel="styleSheet" href="/Login.css">
+    <meta content="no-cache, no-store, must-revalidate" http-equiv="content-type">
+    <meta content="no-cache" http-equiv="refresh">
+</head>
+
+<body>
+<div id="root">
+    <!--/* ログイン */-->
+    <div>
+        <form method="post">
+            <div>
+                <table class="login">
+                    <tbody>
+                    <tr>
+                        <td class="mail">
+                            <nobr>郵便番号</nobr>
+                        </td>
+                        <td><label>
+                            <input name="post_top" required type="text" maxlength="3" size="4" pattern="[a-zA-Z0-9]*" title="半角英数字のみ入力してください">
+                        </label></td>
+                        <td><nobr>
+                            <p>-</p>
+                        </nobr></td>
+                        <td><label>
+                            <input name="post_bottom" required type="text" maxlength="4" size="6" pattern="[a-zA-Z0-9]*" title="半角英数字のみ入力してください">
+                        </label></td>
+                    </tr>
+                    <tr>
+                        <td><nobr>
+                            <p>件数</p>
+                        </nobr></td>
+                        <td><label>
+                            <input name="post_num" required type="number" style="width:55px;" pattern="[a-zA-Z0-9]*" title="半角英数字のみ入力してください">
+                        </label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="reset" value="クリア"/>
+                            <input class="favorite styled" type="submit" value="検索"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+
+</html>
