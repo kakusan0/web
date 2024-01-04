@@ -84,4 +84,8 @@ public class LoginController {
         mv.setViewName("account");
         return mv;
     }
+    @GetMapping("/batch")
+    public static String batch() {
+        return "front";
+    }
 }
