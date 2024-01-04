@@ -12,11 +12,23 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
-    @Autowired
-    HttpSession session;
-
-    @Autowired
     private Login Login;
+    /*
+    * @param ログイン制御
+     */
+    @Autowired
+    public void loginController(Login Login){
+        this.Login = Login;
+    }
+
+    HttpSession session;
+    /*
+     * @param セッション制御
+     */
+    @Autowired
+    public void sessionController(HttpSession session){
+        this.session = session;
+    }
 
     /**
      * @return 1.ログイン画面に遷移
