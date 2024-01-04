@@ -12,21 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
+    @Autowired
     HttpSession session;
 
     @Autowired
-    public void Session(HttpSession session) {
-        // フィールドに代入する
-        this.session = session;
-    }
-
     private Login Login;
-
-    @Autowired
-    public void Login(Login Login) {
-        // フィールドに代入する
-        this.Login = Login;
-    }
 
     /**
      * @return 1.ログイン画面に遷移
@@ -50,7 +40,7 @@ public class LoginController {
         String PW = userstorage.getPw();
         //アカウントが存在している場合
         if (!Login.check(USER, PW)) {
-            this.session.setAttribute("USER", USER);
+            session.setAttribute("USER", USER);
             mv.setViewName("redirect:/test");
         } else {
             //アカウントが存在しない場合、
@@ -73,7 +63,7 @@ public class LoginController {
         //アカウントが登録できる場合
         if (Login.check(USER, PW)) {
             Login.newUser(USER, PW);
-            this.session.setAttribute("USER", USER);
+            session.setAttribute("USER", USER);
             mv.setViewName("redirect:/test");
         } else {
             //アカウントが存在しない場合、
@@ -90,7 +80,7 @@ public class LoginController {
      */
     @GetMapping("/logout")
     public ModelAndView logout(ModelAndView mv) {
-        this.session.invalidate();
+        session.invalidate();
         mv.setViewName("account");
         return mv;
     }
