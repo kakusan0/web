@@ -11,15 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+
 public class LoginController {
-    private Login Login;
     /*
-    * @param ログイン制御
+     * @param ログイン制御
      */
     @Autowired
-    public void loginController(Login Login){
-        this.Login = Login;
-    }
+    private Login Login;
+
 
     HttpSession session;
     /*
