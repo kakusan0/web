@@ -13,9 +13,9 @@ CREATE TABLE IF NOT EXISTS userstorage
 
 CREATE TABLE IF NOT EXISTS postmaster
 (
-    NationalLocalGovernmentCode INT not null,
-    oldPostalCode               VARCHAR(255),
-    PostCode                    VARCHAR(255),
+    NationalLocalGovernmentCode INT,
+    PostalCode                  INT,
+    PostCode                    INT,
     prefecturesKANA             VARCHAR(255),
     municipalitiesKANA          VARCHAR(255),
     TownAreaKANA                VARCHAR(255),
