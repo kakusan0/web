@@ -11,15 +11,35 @@ CREATE TABLE IF NOT EXISTS userstorage
     UNIQUE (username)
 );
 
-CREATE TABLE IF NOT EXISTS postmaster
+drop view postmaster;
+
+create view postmaster
+            (
+             LeftPostCode, RightPostCode, prefecturesKANZI, municipalitiesKANZI, TownAreaKANZI
+                )
+as
+select SUBSTRING(a.PostCode, 1, 3)
+     , IF(
+            LENGTH(a.PostCode) > 6
+    , SUBSTRING(a.PostCode, 4, 7)
+    , SUBSTRING(a.PostCode, 4, 6)
+       )
+     , a.prefecturesKANZI
+     , a.municipalitiesKANZI
+     , a.TownAreaKANZI
+from temppostmaster a;
+
+TRUNCATE TABLE temppostmaster;
+
+drop table temppostmaster;
+
+CREATE TABLE IF NOT EXISTS temppostmaster
 (
-    NationalLocalGovernmentCode INT,
-    PostalCode                  INT,
-    PostCode                    INT,
-    prefecturesKANA             VARCHAR(255),
-    municipalitiesKANA          VARCHAR(255),
-    TownAreaKANA                VARCHAR(255),
-    prefecturesKANZI            VARCHAR(255),
-    municipalitiesKANZI         VARCHAR(255),
-    TownAreaKANZI               VARCHAR(255)
+    PostCode            VARCHAR(255),
+    prefecturesKANA     VARCHAR(255),
+    municipalitiesKANA  VARCHAR(255),
+    TownAreaKANA        VARCHAR(255),
+    prefecturesKANZI    VARCHAR(255),
+    municipalitiesKANZI VARCHAR(255),
+    TownAreaKANZI       VARCHAR(255)
 );
