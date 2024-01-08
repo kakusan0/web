@@ -10,17 +10,15 @@ import java.io.Serializable;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "viewpostmaster")
 public class Json implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "postcodeleft")
-    private String postcodeleft;
+    private String left;
 
     @Column(name = "postcoderight")
-    private String postcoderight;
+    private String right;
 
     @Column(name = "address")
     private String address;

@@ -8,7 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface postnumber extends JpaRepository<Json, String> {
-
-
-    Optional<Json> findByPostcodeleftAndPostcoderight(String postcodeleft, String postcoderight);
+    Optional<Json> findByLeftAndRight(String left, String right);
 }
