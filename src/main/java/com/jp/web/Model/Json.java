@@ -1,5 +1,6 @@
 package com.jp.web.Model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,43 +12,16 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "postmaster")
+@Table(name = "viewpostmaster")
 public class Json implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "postcodeleft")
+    private String postcodeleft;
 
-    @Column(name = "NationalLocalGovernmentCode")
-    private Integer nationalLocalGovernmentCode;
+    @Column(name = "postcoderight")
+    private String postcoderight;
 
-    @Column(name = "oldPostalCode")
-    private String oldPostalCode;
-
-    @Column(name = "postCode")
-    private String postCode;
-
-    @Column(name = "prefecturesKana")
-    private String prefecturesKana;
-
-    @Column(name = "municipalitiesKana")
-    private String municipalitiesKana;
-
-    @Column(name = "townAreaKana")
-    private String townAreaKana;
-
-    @Column(name = "prefecturesKanzi")
-    private String prefecturesKanzi;
-
-    @Column(name = "municipalitiesKanzi")
-    private String municipalitiesKanzi;
-
-    @Column(name = "townAreaKanzi")
-    private String townAreaKanzi;
-
-    // Custom constructor if needed
-    public Json(Integer nationalLocalGovernmentCode, String oldPostalCode) {
-        this.nationalLocalGovernmentCode = nationalLocalGovernmentCode;
-        this.oldPostalCode = oldPostalCode;
-        // Initialize other fields as necessary
-    }
+    @Column(name = "address")
+    private String address;
 }
